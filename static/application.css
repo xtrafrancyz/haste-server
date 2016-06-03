@@ -47,6 +47,7 @@ textarea {
 
 #box code {
 	padding: 0px;
+	tab-size: 4;
 	background: transparent !important; /* don't hide hastebox */
 }
 
