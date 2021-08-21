@@ -31,7 +31,7 @@ haste_document.prototype.load = function(key, callback, lang) {
           high = { value: _this.htmlEscape(res.data) };
         }
         else if (lang) {
-          high = hljs.highlight(lang, res.data);
+          high = hljs.highlight(res.data, {language: lang, ignoreIllegals: false});
         }
         else {
           high = hljs.highlightAuto(res.data);
@@ -170,8 +170,7 @@ haste.extensionMap = {
   lua: 'lua', pas: 'delphi', java: 'java', cpp: 'cpp', cc: 'cpp', m: 'objectivec',
   vala: 'vala', sql: 'sql', sm: 'smalltalk', lisp: 'lisp', ini: 'ini',
   diff: 'diff', bash: 'bash', sh: 'bash', tex: 'tex', erl: 'erlang', hs: 'haskell',
-  md: 'markdown', txt: '', coffee: 'coffee', json: 'javascript',
-  swift: 'swift'
+  md: 'markdown', txt: '', coffee: 'coffee', swift: 'swift'
 };
 
 // Look up the extension preferred for a type
