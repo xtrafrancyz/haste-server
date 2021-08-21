@@ -15,11 +15,11 @@ To make a new entry, click "New" (or type 'control + n')
 
 ## From the Console
 
-Most of the time I want to show you some text, its coming from my current
+Most of the time I want to show you some text, it's coming from my current
 console session.  We should make it really easy to take code from the console
 and send it to people.
 
-`cat something | haste` # http://hastebin.com/1238193
+`cat something | haste` # https://hastebin.com/1238193
 
 You can even take this a step further, and cut out the last step of copying the
 URL with:

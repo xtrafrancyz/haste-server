@@ -23,10 +23,17 @@
     "type": "phonetic"
   },
 
+  "rateLimits": {
+    "categories": {
+      "normal": {
+        "totalRequests": 500,
+        "every": 60000
+      }
+    }
+  },
+
   "storage": {
-    "type": "file",
-	"path": "./data",
-    "expire": 2592000
+    "type": "file"
   },
 
   "documents": {
