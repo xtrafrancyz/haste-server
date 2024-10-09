@@ -1,7 +1,8 @@
-FROM node:14.8.0-stretch
+FROM node:22-bullseye
 
 RUN mkdir -p /usr/src/app && \
-    chown node:node /usr/src/app
+    chown node:node /usr/src/app && \
+    mkdir -p /data/storage
 
 USER node:node 
 
@@ -10,22 +11,13 @@ WORKDIR /usr/src/app
 COPY --chown=node:node . . 
 
 RUN npm install && \
-    npm install redis@0.8.1 && \
-    npm install pg@4.1.1 && \
-    npm install memcached@2.2.2 && \
-    npm install aws-sdk@2.738.0 && \
-    npm install rethinkdbdash@2.3.31
+    npm install aws-sdk@2.738.0
 
-ENV STORAGE_TYPE=memcached \
-    STORAGE_HOST=127.0.0.1 \
-    STORAGE_PORT=11211\
+ENV STORAGE_TYPE=file \
     STORAGE_EXPIRE_SECONDS=2592000\
-    STORAGE_DB=2 \
     STORAGE_AWS_BUCKET= \
     STORAGE_AWS_REGION= \
-    STORAGE_USENAMER= \
-    STORAGE_PASSWORD= \
-    STORAGE_FILEPATH= 
+    STORAGE_FILEPATH=/data/storage
 
 ENV LOGGING_LEVEL=verbose \
     LOGGING_TYPE=Console \
@@ -53,6 +45,8 @@ ENV RATELIMITS_NORMAL_TOTAL_REQUESTS=500\
     # comma separated list for the blacklisted \
     RATELIMITS_BLACKLIST=example1.blacklist,example2.blacklist 
 ENV DOCUMENTS=about=./about.md
+
+VOLUME [ "/data/storage" ]
 
 EXPOSE ${PORT}
 STOPSIGNAL SIGINT

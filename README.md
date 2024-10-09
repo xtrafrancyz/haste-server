@@ -99,143 +99,6 @@ something like:
 
 where `path` represents where you want the files stored.
 
-File storage currently does not support paste expiration, you can follow [#191](https://github.com/seejohnrun/haste-server/issues/191) for status updates.
-
-### Redis
-
-To use redis storage you must install the `redis` package in npm, and have
-`redis-server` running on the machine.
-
-`npm install redis`
-
-Once you've done that, your config section should look like:
-
-``` json
-{
-  "type": "redis",
-  "host": "localhost",
-  "port": 6379,
-  "db": 2
-}
-```
-
-You can also set an `expire` option to the number of seconds to expire keys in.
-This is off by default, but will constantly kick back expirations on each view
-or post.
-
-All of which are optional except `type` with very logical default values.
-
-If your Redis server is configured for password authentification, use the `password` field.
-
-### Postgres
-
-To use postgres storage you must install the `pg` package in npm
-
-`npm install pg`
-
-Once you've done that, your config section should look like:
-
-``` json
-{
-  "type": "postgres",
-  "connectionUrl": "postgres://user:password@host:5432/database"
-}
-```
-
-You can also just set the environment variable for `DATABASE_URL` to your database connection url.
-
-You will have to manually add a table to your postgres database:
-
-`create table entries (id serial primary key, key varchar(255) not null, value text not null, expiration int, unique(key));`
-
-You can also set an `expire` option to the number of seconds to expire keys in.
-This is off by default, but will constantly kick back expirations on each view
-or post.
-
-All of which are optional except `type` with very logical default values.
-
-### MongoDB
-
-To use mongodb storage you must install the 'mongodb' pachage in npm
-
-`npm install mongodb`
-
-Once you've done that, your config section should look like:
-
-``` json
-{
-  "type": "mongodb",
-  "connectionUrl": "mongodb://localhost:27017/database"
-}
-```
-
-You can also just set the environment variable for `DATABASE_URL` to your database connection url.
-
-Unlike with postgres you do NOT have to create the table in your mongo database prior to running.
-
-You can also set an `expire` option to the number of seconds to expire keys in.
-This is off by default, but will constantly kick back expirations on each view or post.
-
-### Memcached
-
-To use memcache storage you must install the `memcached` package via npm
-
-`npm install memcached`
-
-Once you've done that, your config section should look like:
-
-``` json
-{
-  "type": "memcached",
-  "host": "127.0.0.1",
-  "port": 11211
-}
-```
-
-You can also set an `expire` option to the number of seconds to expire keys in.
-This behaves just like the redis expirations, but does not push expirations
-forward on GETs.
-
-All of which are optional except `type` with very logical default values.
-
-### RethinkDB
-
-To use the RethinkDB storage system, you must install the `rethinkdbdash` package via npm
-
-`npm install rethinkdbdash`
-
-Once you've done that, your config section should look like this:
-
-``` json
-{
-  "type": "rethinkdb",
-  "host": "127.0.0.1",
-  "port": 28015,
-  "db": "haste"
-}
-```
-
-In order for this to work, the database must be pre-created before the script is ran.
-Also, you must create an `uploads` table, which will store all the data for uploads.
-
-You can optionally add the `user` and `password` properties to use a user system.
-
-### Google Datastore
-
-To use the Google Datastore storage system, you must install the `@google-cloud/datastore` package via npm
-
-`npm install @google-cloud/datastore`
-
-Once you've done that, your config section should look like this:
-
-``` json
-{
-  "type": "google-datastore"
-}
-```
-
-Authentication is handled automatically by [Google Cloud service account credentials](https://cloud.google.com/docs/authentication/getting-started), by providing authentication details to the GOOGLE_APPLICATION_CREDENTIALS environmental variable.
-
 ### Amazon S3
 
 To use [Amazon S3](https://aws.amazon.com/s3/) as a storage system, you must
@@ -287,7 +150,7 @@ docker build --tag haste-server .
 For this example we will run haste-server, and connect it to a redis server
 
 ```bash
-docker run --name haste-server-container --env STORAGE_TYPE=redis --env STORAGE_HOST=redis-server --env STORAGE_PORT=6379 haste-server
+docker run --name haste-server-container --volume=./data:/data/storage -p 7777:7777 haste-server
 ```
 
 ### Use docker-compose example
@@ -308,13 +171,8 @@ Here is a list of all the environment variables
 
 |          Name          | Default value |                                                  Description                                                  |
 | :--------------------: | :-----------: | :-----------------------------------------------------------------------------------------------------------: |
-|      STORAGE_TYPE      |   memcached   |    Type of storage . Accepted values: "memcached","redis","postgres","rethinkdb", "amazon-s3", and "file"     |
-|      STORAGE_HOST      |   127.0.0.1   |                 Storage host. Applicable for types: memcached, redis, postgres, and rethinkdb                 |
-|      STORAGE_PORT      |     11211     |           Port on the storage host. Applicable for types: memcached, redis, postgres, and rethinkdb           |
+|      STORAGE_TYPE      |   file        |    Type of storage . Accepted values: "amazon-s3", and "file"     |
 | STORAGE_EXPIRE_SECONDS |    2592000    | Number of seconds to expire keys in. Applicable for types. Redis, postgres, memcached. `expire` option to the |
-|       STORAGE_DB       |       2       |                    The name of the database. Applicable for redis, postgres, and rethinkdb                    |
-|    STORAGE_PASSWORD    |               |                       Password for database. Applicable for redis, postges, rethinkdb .                       |
-|    STORAGE_USERNAME    |               |                           Database username. Applicable for postgres, and rethinkdb                           |
 |   STORAGE_AWS_BUCKET   |               |                          Applicable for amazon-s3. This is the name of the S3 bucket                          |
 |   STORAGE_AWS_REGION   |               |                      Applicable for amazon-s3. The region in which the bucket is located                      |
 |    STORAGE_FILEPATH    |               |                            Path to file to save data to. Applicable for type file                             |
@@ -386,4 +244,3 @@ SOFTWARE
 
 * jQuery: MIT/GPL license
 * highlight.js: Copyright © 2006, Ivan Sagalaev
-* highlightjs-coffeescript: WTFPL - Copyright © 2011, Dmytrii Nagirniak

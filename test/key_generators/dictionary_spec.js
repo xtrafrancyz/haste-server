@@ -1,13 +1,9 @@
-/* global describe, it */
+import assert from 'assert';
+import fs from 'fs';
+import Generator from '../../lib/key_generators/dictionary.js';
 
-const assert = require('assert');
-
-const fs = require('fs');
-
-const Generator = require('../../lib/key_generators/dictionary');
-
-describe('RandomKeyGenerator', function() {
-  describe('randomKey', function() {
+describe('DictionaryKeyGenerator', () => {
+  describe('randomKey', () => {
     it('should throw an error if given no options', () => {
       assert.throws(() => {
         new Generator();
@@ -25,7 +21,7 @@ describe('RandomKeyGenerator', function() {
       const words = ['cat'];
       fs.writeFileSync(path, words.join('\n'));
 
-      const gen = new Generator({path}, () => {
+      const gen = new Generator({ path }, () => {
         assert.equal('catcatcat', gen.createKey(3));
       });
     });

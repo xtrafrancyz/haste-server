@@ -165,12 +165,10 @@ haste.prototype.newDocument = function(hideHistory) {
 // due to the behavior of lookupTypeByExtension and lookupExtensionByType
 // Note: optimized for lookupTypeByExtension
 haste.extensionMap = {
-  rb: 'ruby', py: 'python', pl: 'perl', php: 'php', scala: 'scala', go: 'go',
-  xml: 'xml', html: 'xml', htm: 'xml', css: 'css', js: 'javascript', vbs: 'vbscript',
-  lua: 'lua', pas: 'delphi', java: 'java', cpp: 'cpp', cc: 'cpp', m: 'objectivec',
-  vala: 'vala', sql: 'sql', sm: 'smalltalk', lisp: 'lisp', ini: 'ini',
-  diff: 'diff', bash: 'bash', sh: 'bash', tex: 'tex', erl: 'erlang', hs: 'haskell',
-  md: 'markdown', txt: '', coffee: 'coffee', swift: 'swift'
+  rb: 'ruby', py: 'python', pl: 'perl', html: 'xml', js: 'javascript', vbs: 'vbscript',
+  pas: 'delphi', cc: 'cpp', m: 'objectivec', ini: 'ini', sh: 'bash',
+  md: 'markdown', txt: '', patch: 'diff', kt: 'kotlin', ts: 'typescript',
+  ps1: 'powershell', rs: 'rust', proto: 'protobuf', cs: 'csharp'
 };
 
 // Look up the extension preferred for a type

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Private Pastebin Server",
+  "type": "module",
   "keywords": [
     "paste",
     "pastebin"
@@ -18,9 +19,6 @@
     "connect": "^3.7.0",
     "connect-ratelimit": "0.0.7",
     "connect-route": "0.1.5",
-    "pg": "^8.9.0",
-    "redis": "0.8.1",
-    "redis-url": "0.1.0",
     "st": "^2.0.0",
     "uglify-js": "^3.17.4",
     "winston": "^2.0.0"
@@ -28,7 +26,6 @@
   "devDependencies": {
     "mocha": "^10.2.0"
   },
-  "bundledDependencies": [],
   "bin": {
     "haste-server": "./server.js"
   },
@@ -43,6 +40,5 @@
   "scripts": {
     "start": "node server.js",
     "test": "mocha --recursive"
-  },
-  "bundleDependencies": []
+  }
 }

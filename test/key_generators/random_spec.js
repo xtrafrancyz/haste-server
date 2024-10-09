@@ -1,10 +1,7 @@
-/* global describe, it */
+import assert from 'assert';
+import Generator from '../../lib/key_generators/random.js';
 
-const assert = require('assert');
-
-const Generator = require('../../lib/key_generators/random');
-
-describe('RandomKeyGenerator', () => {
+describe('PhoneticKeyGenerator', () => {
   describe('randomKey', () => {
     it('should return a key of the proper length', () => {
       const gen = new Generator();
