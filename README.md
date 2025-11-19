@@ -3,7 +3,7 @@
 Haste is an open-source pastebin software written in node.js, which is easily
 installable in any network.  It can be backed by either redis or filesystem,
 and has a very easy adapter interface for other stores.  A publicly available
-version can be found at [hastebin.com](http://hastebin.com)
+version can be found at [paste.xtrafrancyz.net](https://paste.xtrafrancyz.net)
 
 Major design objectives:
 
@@ -41,7 +41,7 @@ STDOUT.  Check the README there for more details and usages.
 * `maxLength` - maximum length of a paste (default 400000)
 * `staticMaxAge` - max age for static assets (86400)
 * `recompressStaticAssets` - whether or not to compile static js assets (true)
-* `documents` - static documents to serve (ex: http://hastebin.com/about.com)
+* `documents` - static documents to serve (ex: https://paste.xtrafrancyz.net/about.md)
   in addition to static assets.  These will never expire.
 * `storage` - storage options (see below)
 * `logging` - logging preferences
@@ -214,13 +214,18 @@ Here is a list of all the environment variables
 
 ## Author
 
-John Crepezzi <john.crepezzi@gmail.com>
+xtrafrancyz <xtrafrancyz@gmail.com>
+
+Original Code by John Crepezzi <john.crepezzi@gmail.com>
+
+Key Design by Brian Dawson <bridawson@gmail.com>
 
 ## License
 
 (The MIT License)
 
-Copyright © 2011-2012 John Crepezzi
+Copyright © 2011-2020 John Crepezzi
+Copyright © 2020-2025 xtrafrancyz
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the ‘Software’), to deal in
