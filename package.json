@@ -23,9 +23,6 @@
     "uglify-js": "^3.17.4",
     "winston": "^2.0.0"
   },
-  "devDependencies": {
-    "mocha": "^10.2.0"
-  },
   "bin": {
     "haste-server": "./server.js"
   },
@@ -38,7 +35,6 @@
     "lib": "./lib"
   },
   "scripts": {
-    "start": "node server.js",
-    "test": "mocha --recursive"
+    "start": "node server.js"
   }
 }
