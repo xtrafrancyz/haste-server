@@ -20,7 +20,6 @@
     "connect-ratelimit": "0.0.7",
     "connect-route": "0.1.5",
     "st": "^2.0.0",
-    "uglify-js": "^3.17.4",
     "winston": "^2.0.0"
   },
   "bin": {

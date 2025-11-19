@@ -1,6 +1,5 @@
 import http from 'http';
 import fs from 'fs';
-import uglify from 'uglify-js';
 import winston from 'winston';
 import connect from 'connect';
 import route from 'connect-route';
@@ -41,21 +40,6 @@ if (!config.storage.type) {
 
 let { default: Store } = await import('./lib/document_stores/' + config.storage.type + '.js');
 let preferredStore = new Store(config.storage);
-
-// Compress the static javascript assets
-if (config.recompressStaticAssets) {
-  const list = fs.readdirSync('./static');
-  for (let j = 0; j < list.length; j++) {
-    const item = list[j];
-    if ((item.indexOf('.js') === item.length - 3) && (item.indexOf('.min.js') === -1)) {
-      const dest = item.substring(0, item.length - 3) + '.min' + item.substring(item.length - 3);
-      const orig_code = fs.readFileSync('./static/' + item, 'utf8');
-
-      fs.writeFileSync('./static/' + dest, uglify.minify(orig_code).code, 'utf8');
-      winston.info('compressed ' + item + ' into ' + dest);
-    }
-  }
-}
 
 // Send the static documents into the preferred store, skipping expirations
 for (const name in config.documents) {

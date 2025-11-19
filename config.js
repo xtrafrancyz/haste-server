@@ -9,8 +9,6 @@
 
   "staticMaxAge": 86400,
 
-  "recompressStaticAssets": true,
-
   "logging": [
     {
       "level": "verbose",
